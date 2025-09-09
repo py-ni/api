@@ -38,4 +38,4 @@ class Eval:
     def Eval(code: Code, globals: Dict, locals: Dict): ...
 
 
-del Enum, Dict
+del Enum, Dict, Str
