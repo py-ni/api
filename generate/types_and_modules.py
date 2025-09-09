@@ -71,7 +71,7 @@ class TypeSpec:
     """
 
 @function_pointer
-def CFunctionPointer(args: [Void]) -> [Void]: ...
+def CFunctionPointer() -> Void: ...
 
 class FunctionDefinition(Struct):
     name: utf_string
