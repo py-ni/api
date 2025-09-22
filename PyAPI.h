@@ -133,8 +133,6 @@ PyRef PyNI_Dict_Get(PyContext ctx, PyDictRef self, PyRef key, PyRef default_);
 
 PyRef PyNI_Dict_GetItem(PyContext ctx, PyDictRef self, PyRef key);
 
-PyRef PyNI_Dict_GetItem_s(PyContext ctx, PyDictRef self, PyRef key);
-
 PyDictRef PyNI_Dict_New(PyContext ctx);
 
 bool PyNI_CanDownCastToDict(PyRef ref);
@@ -522,8 +520,6 @@ int PyNI_Object_SetItem_i(PyContext ctx, PyRef obj, intptr_t key, PyRef value);
 int PyNI_Object_DelItem(PyContext ctx, PyRef obj, PyRef key);
 
 int PyNI_Object_DelItem_i(PyContext ctx, PyRef obj, intptr_t key);
-
-int PyNI_Object_DelItem_s(PyContext ctx, PyRef obj, const Utf8String key);
 
 PyRef PyNI_Object_GetAttr(PyContext ctx, PyRef obj, PyRef attr);
 
