@@ -4,6 +4,7 @@
 typedef struct PyRef {intptr_t bits;} PyRef;
 typedef struct PyContext {intptr_t bits;} PyContext;
 typedef char *Utf8String;
+typedef char *Utf8StringZ;
 PyRef PyRef_MISSING;
 PyRef PyRef_ERROR;
 
@@ -36,12 +37,12 @@ typedef struct PyExceptionRef PyExceptionRef;
 /* typedefs for generate.vm */
 typedef struct PyCodeRef PyCodeRef;
 typedef struct PyFrameStackRef PyFrameStackRef;
-typedef int32_t EvalSourceKind;
+typedef enum EvalSourceKind EvalSourceKind;
 
 /* typedefs for generate.types_and_modules */
 typedef PyRef (*PyNI_VectorCall_FuncPtr)(PyContext ctx, PyRef callable, PyRef args[], intptr_t nargsf, PyTupleRef kwnames);
 
-typedef int32_t CType;
+typedef enum CType CType;
 typedef struct FieldDescriptor FieldDescriptor;
 typedef PyRef (*PyNI_Getter_FuncPtr)(PyContext ctx, PyRef obj, FieldDescriptor field, void* data);
 
@@ -564,16 +565,16 @@ int PyNI_Object_CompareBool(PyContext ctx, uint8_t op, PyRef left, PyRef right);
 struct PyExceptionRef {intptr_t _bits;};
 PyExceptionRef PyNI_Exception_New(PyContext ctx, PyClassRef cls, PyRef message);
 
-PyExceptionRef PyNI_Exception_New_s(PyContext ctx, PyClassRef cls, const Utf8String message);
+PyExceptionRef PyNI_Exception_New_s(PyContext ctx, PyClassRef cls, const Utf8StringZ message);
 
-void PyNI_Exception_Fatal(PyContext ctx, const Utf8String message);
+void PyNI_Exception_Fatal(PyContext ctx, const Utf8StringZ message);
 
-PyRef PyNI_Exception_FromErrnoWithFilename(PyContext ctx, PyClassRef cls, const Utf8String filename);
+PyRef PyNI_Exception_FromErrnoWithFilename(PyContext ctx, PyClassRef cls, const Utf8StringZ filename);
 
 /* Always fails. Barring another error,
 will raise the newly created exception.
  */
-PyRef PyNI_Exception_RaiseNew(PyContext ctx, PyClassRef cls, const Utf8String message);
+PyRef PyNI_Exception_RaiseNew(PyContext ctx, PyClassRef cls, const Utf8StringZ message);
 
 /* Always fails. Barring another error,
 will raise the newly created exception.
@@ -597,7 +598,7 @@ int PyNI_Exception_Matches(PyContext ctx, PyRef exc, PyClassRef exc_cls);
 
 void PyNI_Exception_WriteUnraisable(PyContext ctx, PyRef exc);
 
-int PyNI_Exception_Warn(PyContext ctx, PyRef category, const Utf8String message, int stack_level);
+int PyNI_Exception_Warn(PyContext ctx, PyRef category, const Utf8StringZ message, int stack_level);
 
 bool PyNI_CanDownCastToException(PyRef ref);
 int PyNI_Exception_IsError(PyExceptionRef ref);
@@ -687,9 +688,9 @@ enum EvalSourceKind {
     Single = 2,
 };
 
-PyCodeRef PyNI_Eval_Compile(PyContext ctx, PyRef src, PyRef filename, EvalSourceKind kind);
+PyCodeRef PyNI_Eval_Compile(PyContext ctx, PyRef src, PyRef filename, int kind);
 
-PyCodeRef PyNI_Eval_Compile_s(PyContext ctx, const Utf8String src, const Utf8String filename, EvalSourceKind kind);
+PyCodeRef PyNI_Eval_Compile_s(PyContext ctx, const Utf8String src, const Utf8String filename, int kind);
 
 PyRef PyNI_Eval_Eval(PyContext ctx, PyCodeRef code, PyDictRef globals, PyDictRef locals);
 
@@ -718,7 +719,7 @@ enum CType {
 
 /* FieldDescriptor from generate.types_and_modules */
 
-/* (<class 'generate.types_and_modules.FieldDescriptor'>, '') */
+/* Generated from FieldDescriptor */
 struct FieldDescriptor {
     const Utf8String name;
     const Utf8String doc;
@@ -732,7 +733,7 @@ struct FieldDescriptor {
 
 /* StructLayout from generate.types_and_modules */
 
-/* (<class 'generate.types_and_modules.StructLayout'>, '') */
+/* Generated from StructLayout */
 struct StructLayout {
     const Utf8String name;
     FieldDescriptor *fields;
@@ -745,7 +746,7 @@ struct StructLayout {
 
 /* FunctionDefinition from generate.types_and_modules */
 
-/* (<class 'generate.types_and_modules.FunctionDefinition'>, '') */
+/* Generated from FunctionDefinition */
 struct FunctionDefinition {
     const Utf8String name;
     const Utf8String doc;
@@ -760,7 +761,7 @@ struct FunctionDefinition {
 
 /* Def from generate.types_and_modules */
 
-/* (<class 'generate.types_and_modules.Module.Def'>, 'Module') */
+/* Generated from Module.Def */
 struct ModuleDef {
     const Utf8String doc;
     StructLayout state;
