@@ -47,10 +47,13 @@ def get_arg_decl(name, namespace, annotations):
     if name in CONFLICTING_C_KEYWORDS:
         name = f'{name}_'
     cls = annotations.get(name, object)
+    suffix = ''
     if isinstance(cls, list):
-        return [f"{ctype_for_class(cls[0], namespace)}", f"{name}[]"]
-    else:
-        return [f"{ctype_for_class(cls, namespace)}", f"{name}"]
+        cls = cls[0]
+        suffix = '[]'
+    if isinstance(cls, type) and issubclass(cls, Enum):
+        cls = int
+    return [f"{ctype_for_class(cls, namespace)}", f"{name}{suffix}"]
 
 def get_field_decl(name, namespace, annotations):
     if name == "self":
