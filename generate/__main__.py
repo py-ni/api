@@ -141,7 +141,7 @@ def generate_typedefs(name, obj, namespace):
         return
     cls = obj
     if issubclass(cls, Enum):
-        print(f"typedef int32_t {namespace}{cls.__name__};")
+        print(f"typedef enum {namespace}{cls.__name__} {namespace}{cls.__name__};")
     elif issubclass(cls, Struct):
         print(f"typedef struct {namespace}{cls.__name__} {namespace}{cls.__name__};")
     else:
