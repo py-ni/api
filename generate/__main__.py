@@ -112,6 +112,7 @@ print(f"#include <stdint.h>")
 print(f"typedef struct {REF} {{intptr_t bits;}} {REF};")
 print(f"typedef struct PyContext {{intptr_t bits;}} PyContext;")
 print(f"typedef char *Utf8String;")
+print(f"typedef char *Utf8StringZ;")
 
 print(f"{REF} {MISSING};")
 print(f"{REF} {ERROR};\n")
