@@ -174,7 +174,7 @@ def generate_api(name, obj, namespace):
             print(f"    {item.name} = {item.value},")
         print(f"}};")
     elif issubclass(cls, Struct):
-        print(f'/* {cls, namespace} */')
+        print(f'/* Generated from {cls.__qualname__} */')
         print(f"struct {namespace}{cls.__name__} {{")
         for item_name in cls.__annotations__:
             print(f"    {get_field_decl(item_name, namespace, cls.__annotations__)};")
