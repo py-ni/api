@@ -659,7 +659,7 @@ PyRef PyNI_FrameStack_GetLocal(PyContext ctx, PyFrameStackRef self, uintptr_t de
 
 PyRef PyNI_FrameStack_GetLocalByName(PyContext ctx, PyFrameStackRef self, uintptr_t depth, PyStrRef name);
 
-PyRef PyNI_FrameStack_GetLocalByName_s(PyContext ctx, PyFrameStackRef self, uintptr_t depth, const Utf8String name);
+PyRef PyNI_FrameStack_GetLocalByName_s(PyContext ctx, PyFrameStackRef self, uintptr_t depth, const Utf8StringZ name);
 
 PyCodeRef PyNI_FrameStack_GetCode(PyContext ctx, PyFrameStackRef self, uintptr_t depth);
 
@@ -690,7 +690,7 @@ enum EvalSourceKind {
 
 PyCodeRef PyNI_Eval_Compile(PyContext ctx, PyRef src, PyRef filename, int kind);
 
-PyCodeRef PyNI_Eval_Compile_s(PyContext ctx, const Utf8String src, const Utf8String filename, int kind);
+PyCodeRef PyNI_Eval_Compile_s(PyContext ctx, const Utf8StringZ src, const Utf8StringZ filename, int kind);
 
 PyRef PyNI_Eval_Eval(PyContext ctx, PyCodeRef code, PyDictRef globals, PyDictRef locals);
 
@@ -721,8 +721,8 @@ enum CType {
 
 /* Generated from FieldDescriptor */
 struct FieldDescriptor {
-    const Utf8String name;
-    const Utf8String doc;
+    const Utf8StringZ name;
+    const Utf8StringZ doc;
     uint32_t offset;
     uint16_t flags;
     uint8_t type;
@@ -735,7 +735,7 @@ struct FieldDescriptor {
 
 /* Generated from StructLayout */
 struct StructLayout {
-    const Utf8String name;
+    const Utf8StringZ name;
     FieldDescriptor *fields;
 };
 
@@ -748,9 +748,9 @@ struct StructLayout {
 
 /* Generated from FunctionDefinition */
 struct FunctionDefinition {
-    const Utf8String name;
-    const Utf8String doc;
-    const Utf8String signature;
+    const Utf8StringZ name;
+    const Utf8StringZ doc;
+    const Utf8StringZ signature;
     PyNI_CFunctionPointer_FuncPtr impl;
     PyNI_VectorCall_FuncPtr call;
 };
@@ -763,7 +763,7 @@ struct FunctionDefinition {
 
 /* Generated from Module.Def */
 struct ModuleDef {
-    const Utf8String doc;
+    const Utf8StringZ doc;
     StructLayout state;
     FunctionDefinition *functions;
 };

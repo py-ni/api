@@ -38,8 +38,8 @@ def Setter(obj, field: FieldDescriptor, data: Pointer[Void], value) -> Void:
 class FieldDescriptor(Struct):
     """ Describes a field within a struct.
     """
-    name: utf_string
-    doc: utf_string
+    name: utf_string_z
+    doc: utf_string_z
     offset: uint32_t
     flags: uint16_t
     type: uint8_t # Must be one of the CType enum above.
@@ -52,7 +52,7 @@ class StructLayout(Struct):
     the layout of C structs that can be understood by a
     Python VM and any associated tooling.
     Tooling will be provided to parse C structs and produce this struct."""
-    name: utf_string
+    name: utf_string_z
     fields: [FieldDescriptor] # NULL terminated array.
 
 
@@ -74,9 +74,9 @@ class TypeSpec:
 def CFunctionPointer() -> Void: ...
 
 class FunctionDefinition(Struct):
-    name: utf_string
-    doc: utf_string
-    signature: utf_string
+    name: utf_string_z
+    doc: utf_string_z
+    signature: utf_string_z
     impl: CFunctionPointer
     call: VectorCall
 
@@ -85,6 +85,6 @@ class FunctionDefinition(Struct):
 class Module:
 
     class Def(Struct):
-        doc: utf_string
+        doc: utf_string_z
         state: StructLayout
         functions: [FunctionDefinition]
