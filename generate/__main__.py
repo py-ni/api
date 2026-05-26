@@ -132,6 +132,8 @@ def generate_module(mod, action):
             continue
         if not isinstance(obj, (type, FunctionType)):
             continue
+        if obj.__module__ != mod.__name__:
+            continue
         action(name, obj, "")
 
 def generate_typedefs(name, obj, namespace):

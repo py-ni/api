@@ -340,7 +340,3 @@ class Bytes:
     def FromArray(data: "const char *", length: uintptr_t) -> Self: ...
 
     def GetSize(self) -> uintptr_t: ...
-
-
-
-del preferred, namespace, no_fail, function_pointer

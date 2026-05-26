@@ -36,6 +36,3 @@ class Eval:
     def Compile_s(src: utf_string_z, filename: utf_string_z, kind: SourceKind) -> Code: ...
 
     def Eval(code: Code, globals: Dict, locals: Dict): ...
-
-
-del Enum, Dict, Str

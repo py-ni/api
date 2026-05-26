@@ -40,8 +40,6 @@ typedef struct PyFrameStackRef PyFrameStackRef;
 typedef enum EvalSourceKind EvalSourceKind;
 
 /* typedefs for generate.types_and_modules */
-typedef PyRef (*PyNI_VectorCall_FuncPtr)(PyContext ctx, PyRef callable, PyRef args[], intptr_t nargsf, PyTupleRef kwnames);
-
 typedef enum CType CType;
 typedef struct FieldDescriptor FieldDescriptor;
 typedef PyRef (*PyNI_Getter_FuncPtr)(PyContext ctx, PyRef obj, FieldDescriptor field, void* data);
