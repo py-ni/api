@@ -6,7 +6,8 @@ CONTEXT = "PyContext ctx"
 MISSING = REF + "_MISSING"
 ERROR = REF + "_ERROR"
 
-utf_string = "const UtfString"
+utf_string = "const Utf8String"
+utf_string_z = "const Utf8StringZ"
 
 class Pointer:
 
